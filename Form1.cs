@@ -14,6 +14,7 @@ namespace DB_valkrusman
 {
     public partial class Form1 : Form
     {
+        OpenFileDialog openFileDialog;
         //SqlConnection connect = new SqlConnection(@"Data Source = (LocalDB)\MSSQLLocalDB; AttachDbFilename=|DataDirectory|\AppData\Tooded_DB.mdf;Integrated Security = True");
         SqlConnection connect = new SqlConnection(@"Data Source = (LocalDB)\MSSQLLocalDB; AttachDbFilename=C:\Users\opilane\source\repos\DB_valkrusman\AppData\Tooded_DB.mdf;Integrated Security = True");
         SqlCommand cmd;
@@ -112,9 +113,53 @@ namespace DB_valkrusman
             connect.Close();
         }
 
-      
+        private void Kustuta_btn_Click(object sender, EventArgs e)
+        {
+            if(MessageBox.Show("Toode-Jah/Kategooria-Ei","Mida soovite kustutada?",MessageBoxButtons.YesNo)==0)
+            {
 
-      
+                if (dataGridView1.SelectedRows.Count == 0)
+                    return;
+
+                string sql = "DELETE FROM Toodedtable WHERE id=@rowID";
+
+                using (SqlCommand deleteRecord = new SqlCommand(sql, connect))
+                {
+                    connect.Open();
+                    int selectedIndex = dataGridView1.SelectedRows[0].Index;
+                    int rowID = Convert.ToInt32(dataGridView1[0, selectedIndex].Value);
+
+                    deleteRecord.Parameters.Add("@rowID", SqlDbType.Int).Value = rowID;
+                    deleteRecord.ExecuteNonQuery();
+
+                    dataGridView1.Rows.RemoveAt(selectedIndex);
+                }
+            }
+            else
+            {
+                if (Kat_cbox.Text == "") return;
+                string sql = "DELETE FROM Kategooria WHERE Kategooria_nimetus=@kat";
+                using (SqlCommand deleteRecord = new SqlCommand(sql, connect))
+                {
+                    deleteRecord.Parameters.AddWithValue("@kat", Kat_cbox.Text);
+                    deleteRecord.ExecuteNonQuery();
+                }
+            }
+            connect.Close();
+        }
+
+        private void Otsi_btn_Click(object sender, EventArgs e)
+        {
+            openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "JPEG Files(*.jpg) | *.jpg | PNG Files(*.png) | *.png | BMP Files(*.bmp) | *.bmp | All files(*.*) | *.*";
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                Toode_gb.Load(openFileDialog.FileName);
+            }
+
+        }
+
+
 
 
 
@@ -155,10 +200,12 @@ namespace DB_valkrusman
 
         }
 
-        
+
+
         private void Toode_gb_Click(object sender, EventArgs e)
         {
 
         }
+       
     }
 }
