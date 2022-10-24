@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.toode_txt = new System.Windows.Forms.TextBox();
             this.hind_txt = new System.Windows.Forms.TextBox();
             this.kogus_txt = new System.Windows.Forms.TextBox();
@@ -55,7 +55,6 @@
             this.toode_txt.Name = "toode_txt";
             this.toode_txt.Size = new System.Drawing.Size(130, 20);
             this.toode_txt.TabIndex = 0;
-            this.toode_txt.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // hind_txt
             // 
@@ -70,7 +69,6 @@
             this.kogus_txt.Name = "kogus_txt";
             this.kogus_txt.Size = new System.Drawing.Size(130, 20);
             this.kogus_txt.TabIndex = 2;
-            this.kogus_txt.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
             // 
             // Toode_lbl
             // 
@@ -80,7 +78,6 @@
             this.Toode_lbl.Size = new System.Drawing.Size(77, 13);
             this.Toode_lbl.TabIndex = 3;
             this.Toode_lbl.Text = "Toode nimetus";
-            this.Toode_lbl.Click += new System.EventHandler(this.label1_Click);
             // 
             // Kategooria_lbl
             // 
@@ -108,7 +105,6 @@
             this.Kogus_lbl.Size = new System.Drawing.Size(37, 13);
             this.Kogus_lbl.TabIndex = 6;
             this.Kogus_lbl.Text = "Kogus";
-            this.Kogus_lbl.Click += new System.EventHandler(this.label4_Click);
             // 
             // Toode_gb
             // 
@@ -118,7 +114,6 @@
             this.Toode_gb.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.Toode_gb.TabIndex = 8;
             this.Toode_gb.TabStop = false;
-            this.Toode_gb.Click += new System.EventHandler(this.Toode_gb_Click);
             // 
             // Otsi_btn
             // 
@@ -148,6 +143,7 @@
             this.Uuenda_btn.TabIndex = 11;
             this.Uuenda_btn.Text = "Uuenda";
             this.Uuenda_btn.UseVisualStyleBackColor = true;
+            this.Uuenda_btn.Click += new System.EventHandler(this.Uuenda_btn_Click);
             // 
             // Kustuta_btn
             // 
@@ -161,27 +157,28 @@
             // 
             // dataGridView1
             // 
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridView1.Location = new System.Drawing.Point(56, 254);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(675, 179);
             this.dataGridView1.TabIndex = 13;
+            this.dataGridView1.RowHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView1_RowHeaderMouseClick);
             // 
             // Kat_cbox
             // 
@@ -199,7 +196,6 @@
             this.Lisa_kat_btn.TabIndex = 15;
             this.Lisa_kat_btn.Text = "Lisa kategooria";
             this.Lisa_kat_btn.UseVisualStyleBackColor = true;
-            this.Lisa_kat_btn.Click += new System.EventHandler(this.button1_Click);
             // 
             // Form1
             // 
