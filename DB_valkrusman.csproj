@@ -102,6 +102,7 @@
     </Content>
     <Content Include="Images\info.jpg" />
     <Content Include="Images\juust.jpg" />
+    <Content Include="Images\majonees.jpg" />
     <Content Include="Images\piim.jpg" />
     <Content Include="Images\select.jpg" />
   </ItemGroup>
@@ -116,6 +117,9 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Arved\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

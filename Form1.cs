@@ -10,6 +10,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Linq;
 
 namespace DB_valkrusman
 {
@@ -20,7 +21,7 @@ namespace DB_valkrusman
         SqlConnection connect = new SqlConnection(@"Data Source = (LocalDB)\MSSQLLocalDB; AttachDbFilename=C:\Users\opilane\source\repos\DB_valkrusman\AppData\Tooded_DB.mdf;Integrated Security = True");
         SqlCommand cmd;
         SqlDataAdapter adapter_toode, adapter_kat;
-        private SaveFileDialog save;
+        
 
         // C:\Users\opilane\source\repos\DB_valkrusman\AppData\Tooded_DB.mdf
 
@@ -36,15 +37,15 @@ namespace DB_valkrusman
         private void Lisa_btn_Click(object sender, EventArgs e)
         {
 
-            if (toode_txt.Text.Trim() != string.Empty && kogus_txt.Text.Trim() != string.Empty && hind_txt.Text.Trim() != string.Empty && Kat_cbox.SelectedItem != null)
+            if (toode_txt.Text.Trim() != string.Empty && kogus_txt1.Text.Trim() != string.Empty && hind_txt1.Text.Trim() != string.Empty && Kat_cbox.SelectedItem != null)
             {
                 try
                 {
                     cmd = new SqlCommand("INSERT INTO Toodedtable(Toodenimetus,Kogus,Hind,Pilt,Kategooria_id) VALUES (@toode,@kogus,@hind,@pilt,@kat)", connect);
                     connect.Open();
                     cmd.Parameters.AddWithValue("@toode", toode_txt.Text);
-                    cmd.Parameters.AddWithValue("@kogus", kogus_txt.Text);
-                    cmd.Parameters.AddWithValue("@hind", hind_txt.Text);//format andmebaasis ja vormis võrdsed
+                    cmd.Parameters.AddWithValue("@kogus", kogus_txt1.Text);
+                    cmd.Parameters.AddWithValue("@hind", hind_txt1.Text);//format andmebaasis ja vormis võrdsed
                     cmd.Parameters.AddWithValue("@pilt", toode_txt.Text + ".jpg"); //format?
                     cmd.Parameters.AddWithValue("@kat", Kat_cbox.SelectedIndex + 1);//id andmebaasist võtta
                     cmd.ExecuteNonQuery();
@@ -83,22 +84,29 @@ namespace DB_valkrusman
         public void Kustuta_andmed()
         {
             toode_txt.Text = " ";
-            hind_txt.Text = " ";
-            kogus_txt.Text = " ";
+            hind_txt1.Text = " ";
+            kogus_txt1.Text = " ";
             Kat_cbox.Items.Clear();
         }
 
 
         private void Lisa_kat_btn_Click(object sender, EventArgs e)
         {
-
-            cmd = new SqlCommand("INSERT INTO Kategooria(Kategooria_nimetus)VALUES(@kat)", connect);
+            cmd = new SqlCommand("INSERT INTO Kategooria (Kategooria_nimetus) VALUES (@kat)", connect);
             connect.Open();
             cmd.Parameters.AddWithValue("@kat", Kat_cbox.Text);
             cmd.ExecuteNonQuery();
             connect.Close();
             Kustuta_andmed();
             Naita_Kat();
+
+            //cmd = new SqlCommand("INSERT INTO Kategooria(Toodenimetus)VALUES(@kat)", connect);
+            //connect.Open();
+            //cmd.Parameters.AddWithValue("@kat", Kat_cbox.Text);
+            //cmd.ExecuteNonQuery();
+            //connect.Close();
+            //Kustuta_andmed();
+            //Naita_Kat();
 
         }
 
@@ -114,6 +122,16 @@ namespace DB_valkrusman
                 Kat_cbox.Items.Add(nimetus["Kategooria_nimetus"]);
             }
             connect.Close();
+
+            //connect.Open();
+            //adapter_kat = new SqlDataAdapter("SELECT Kategooria_nimetus FROM Kategooria", connect);
+            //DataTable dt_kat = new DataTable();
+            //adapter_kat.Fill(dt_kat);
+            //foreach (DataRow nimetus in dt_kat.Rows)
+            //{
+            //    Kat_cbox.Items.Add(nimetus["Kategooria_nimetus"]);
+            //}
+            //connect.Close();
         }
 
         private void Kustuta_btn_Click(object sender, EventArgs e)
@@ -151,22 +169,46 @@ namespace DB_valkrusman
             connect.Close();
         }
 
-        openFileDialog open;
-        PictureBox pictureBox1;
+       
        Random rand=new Random();
+        SaveFileDialog save;
+        OpenFileDialog open;
 
         public int Id { get; private set; }
+        public object PdfWriter { get; private set; }
 
         private void Otsi_btn_Click(object sender, EventArgs e)
         {
+            open = new OpenFileDialog();
+
+            open.InitialDirectory = @"C:\Users\opilane\source\repos\DB_valkrusman\Images";
+            open.Filter = "Image Files(*.jpeg;*.bmp;*.png;*.jpg)|*.jpeg;*.bmp;*.png;*.jpg";
+            FileInfo open_info = new FileInfo(@"C:\Users\opilane\source\repos\DB_valkrusman\Images" + open.FileName);
+            if (open.ShowDialog() == DialogResult.OK && toode_txt != null)
+            {
+                save = new SaveFileDialog();
+                save.InitialDirectory = Path.GetFullPath(@"..\..\Images");
+                save.FileName = toode_txt.Text + Path.GetExtension(open.FileName); //".jpg";            
+                save.Filter = "Image Files" + Path.GetExtension(open.FileName) + "|" + Path.GetExtension(open.FileName);
+
+
+                if (save.ShowDialog() == DialogResult.OK)
+                {
+                    File.Copy(open.FileName, save.FileName);
+                    save.RestoreDirectory = true;
+                    Toode_gb.Image = Image.FromFile(save.FileName);
+                }
+            }
+
+
 
             //openFileDialog.InitialDirectory = @"C:\Users\opilane\source\repos\DB_valkrusman\Images";
-            //if(openFileDialog.ShowDialog() == DialogResult.OK)
+            //if (openFileDialog.ShowDialog() == DialogResult.OK)
             //{
-            //    string ext=Path.GetExtension(openFileDialog.FileName);
+            //    string ext = Path.GetExtension(openFileDialog.FileName);
             //    pictureBox1.Load(openFileDialog.FileName);
             //    Bitmap finalImg = new Bitmap(pictureBox1.Image, pictureBox1.Width, pictureBox1.Height);
-            //    pictureBox1.Image= finalImg;
+            //    pictureBox1.Image = finalImg;
             //    pictureBox1.Show();
             //    string destinationFile;
             //    try
@@ -181,58 +223,109 @@ namespace DB_valkrusman
             //}
 
 
-            openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "All files(*.*) | *.jpg | PNG Files(*.png) | *.png | BMP Files(*.bmp) | *.bmp | All files(*.*) | *.*";
+            //openFileDialog = new OpenFileDialog();
+            //openFileDialog.Filter = "All files(*.*) | *.jpg | PNG Files(*.png) | *.png | BMP Files(*.bmp) | *.bmp | All files(*.*) | *.*";
 
-            if (openFileDialog.ShowDialog() == DialogResult.OK)
-            {
-                Toode_gb.Load(openFileDialog.FileName);
-            }
+            //if (openFileDialog.ShowDialog() == DialogResult.OK)
+            //{
+            //    Toode_gb.Load(openFileDialog.FileName);
+            //}
         }
 
         private void Uuenda_btn_Click(object sender, EventArgs e)
         {
-            if (toode_txt.Text.Trim() != string.Empty && kogus_txt.Text.Trim() != string.Empty && hind_txt.Text.Trim() != string.Empty && Kat_cbox.SelectedItem != null)
+            if (toode_txt.Text != "" && kogus_txt1.Text != "" && hind_txt1.Text != "" && Toode_gb.Image != null)
             {
-                try
-                {
-                    cmd = new SqlCommand("UPDATE Toodedtable SET Toodenimetus,Kogus,Hind,Pilt,Kategooria_id) VALUES (@toode,@kogus,@hind,@pilt,@kat)", connect);
-                    connect.Open();
-                    cmd.Parameters.AddWithValue("@toode", toode_txt.Text);
-                    cmd.Parameters.AddWithValue("@kogus", kogus_txt.Text);
-                    cmd.Parameters.AddWithValue("@hind", hind_txt.Text);//format andmebaasis ja vormis võrdsed
-                    cmd.Parameters.AddWithValue("@pilt", toode_txt.Text + ".jpg"); //format?
-                    cmd.Parameters.AddWithValue("@kat", Kat_cbox.SelectedIndex + 1);//id andmebaasist võtta
-                    cmd.ExecuteNonQuery();
-                    connect.Close();
-                    Kustuta_andmed();
-                    Naita_Andmed();
-
-                }
-                catch (Exception)
-                {
-                    MessageBox.Show("Andmebaasiga viga!");
-                }
+                cmd = new SqlCommand("UPDATE Toodetable  SET Toodenimetus=@toode,Kogus=@kogus,Hind=@hind, Pilt=@pilt WHERE Id=@id", connect);
+                connect.Open();
+                cmd.Parameters.AddWithValue("@id", Id);
+                cmd.Parameters.AddWithValue("@toode", toode_txt.Text);
+                cmd.Parameters.AddWithValue("@kogus", kogus_txt1.Text);
+                cmd.Parameters.AddWithValue("@hind", hind_txt1.Text.Replace(",", "."));
+                string file_pilt = toode_txt.Text + ".jpg";//kontroll
+                cmd.Parameters.AddWithValue("@pilt", file_pilt);
+                cmd.ExecuteNonQuery();
+                connect.Close();
+                Naita_Andmed();
+                Kustuta_andmed();
+                MessageBox.Show("Andmed uuendatud");
             }
             else
             {
-                MessageBox.Show("Sisesta andmeid");
+                MessageBox.Show("Viga");
             }
+
+            //if (toode_txt.Text.Trim() != string.Empty && kogus_txt1.Text.Trim() != string.Empty && hind_txt1.Text.Trim() != string.Empty && Kat_cbox.SelectedItem != null)
+            //{
+            //    try
+            //    {
+            //        cmd = new SqlCommand("UPDATE Toodedtable SET Toodenimetus,Kogus,Hind,Pilt,Kategooria_id) VALUES (@toode,@kogus,@hind,@pilt,@kat)", connect);
+            //        connect.Open();
+            //        cmd.Parameters.AddWithValue("@toode", toode_txt.Text);
+            //        cmd.Parameters.AddWithValue("@kogus", kogus_txt1.Text);
+            //        cmd.Parameters.AddWithValue("@hind", hind_txt1.Text);//format andmebaasis ja vormis võrdsed
+            //        cmd.Parameters.AddWithValue("@pilt", toode_txt.Text + ".jpg"); //format?
+            //        cmd.Parameters.AddWithValue("@kat", Kat_cbox.SelectedIndex + 1);//id andmebaasist võtta
+            //        cmd.ExecuteNonQuery();
+            //        connect.Close();
+            //        Kustuta_andmed();
+            //        Naita_Andmed();
+
+            //    }
+            //    catch (Exception)
+            //    {
+            //        MessageBox.Show("Andmebaasiga viga!");
+            //    }
+            //}
+            //else
+            //{
+            //    MessageBox.Show("Sisesta andmeid");
+            //}
+        }
+
+        Document document = new Document();
+        private void kassa_btn_Click(object sender, EventArgs e)
+        {
+            using (var stream = new FileStream("test.pdf", FileMode.Create, FileAccess.Write, FileShare.None))
+            {
+                PdfWriter.GetInstance(document, stream);
+                document.Open();
+                using (var imageStream = new FileStream("test.jpg", FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+                {
+                    var image = Image.GetInstance(imageStream);
+                    document.Add(image);
+                }
+                document.Close();
+            }
+
         }
 
         private void dataGridView1_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            Id = (int)dataGridView1.Rows[e.RowIndex].Cells[0].Value;//kui andmed puuduvad reas
-            toode_txt.Text = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
-            kogus_txt.Text = dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString();
-            hind_txt.Text = dataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString();
+            try
+            {
+                Id = (int)dataGridView1.Rows[e.RowIndex].Cells[0].Value;//kui andmed puuduvad reas
+                toode_txt.Text = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
+                kogus_txt1.Text = dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString();
+                hind_txt1.Text = dataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString();
 
-            Toode_gb.Image = Image.FromFile(@"..\..\Images\" + dataGridView1.Rows[e.RowIndex].Cells[4].Value.ToString());
-            string v = dataGridView1.Rows[e.RowIndex].Cells[5].Value.ToString();
-            Kat_cbox.SelectedIndex=Int32.Parse(v)-1;
+                Toode_gb.Image = Image.FromFile(@"..\..\Images\" + dataGridView1.Rows[e.RowIndex].Cells[4].Value.ToString());
+                string v = dataGridView1.Rows[e.RowIndex].Cells[5].Value.ToString();
+                Kat_cbox.SelectedIndex = Int32.Parse(v) - 1;
+
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Seda pilti ei ole! Lisa pilt! ");
+            }
+
+
+          
+
+
         }
+        
 
 
-         
     }
 }
