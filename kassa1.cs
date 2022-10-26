@@ -1,4 +1,6 @@
-﻿using System;
+﻿using iTextSharp.text.pdf;
+using iTextSharp.text;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -9,6 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Diagnostics;
 
 namespace DB_valkrusman
 {
@@ -75,7 +78,7 @@ namespace DB_valkrusman
             adapter_toode.Fill(dt_toode);
             dataGridView1.DataSource = dt_toode;
 
-            Toode_gb.Image = Image.FromFile("../../Images/info.jpg");
+            Toode_gb.Image = System.Drawing.Image.FromFile("../../Images/info.jpg");
 
             connect.Close();
             Naita_Kat();
@@ -168,7 +171,7 @@ namespace DB_valkrusman
                 {
                     File.Copy(open.FileName, save.FileName);
                     save.RestoreDirectory = true;
-                    Toode_gb.Image = Image.FromFile(save.FileName);
+                    Toode_gb.Image = System.Drawing.Image.FromFile(save.FileName);
                 }
             }
         }
@@ -199,21 +202,100 @@ namespace DB_valkrusman
 
         }
 
-        //Document document=new Document();
 
+      
         private void button1_Click(object sender, EventArgs e)
         {
-            sfd.Title = "Save As PDF";
-            sfd.Filter = "(*.pdf)|*.pdf";
-            sfd.InitialDirectory = @"C:\";
-            if (sfd.ShowDialog() == DialogResult.OK)
+           
+            Document doc = new Document();
+            PdfPTable tableLayout = new PdfPTable(4);
+            iTextSharp.text.pdf.PdfWriter.GetInstance(doc, new FileStream(@"SVOI PUT", FileMode.Create));
+            doc.Open();
+            doc.Add(Add_Content_To_PDF(tableLayout));
+            doc.Close();
+
+            Process.Start(@"SVOI PUT");
+           
+        }
+
+
+        private PdfPTable Add_Content_To_PDF(PdfPTable tableLayout)
+        {
+            float[] headers = {
+                    20,
+                    20,
+                    30,
+                    30
+            }; 
+            tableLayout.SetWidths(headers);  
+            tableLayout.WidthPercentage = 80;  
+            tableLayout.AddCell(new PdfPCell(new Phrase("Kviitung"))
             {
-                iTextSharp.text.Document doc = new iTextSharp.text.Document();
-                // PdfWriter.GetInstance(doc, new FileStream(sfd.FileName, FileMode.Create));
-                doc.Open();
-                doc.Add(new iTextSharp.text.Paragraph(rtb.Text));
-                doc.Close();
+                Colspan = 4,
+                Border = 0,
+                PaddingBottom = 20,
+                HorizontalAlignment = Element.ALIGN_CENTER
+            });
+          
+            AddCellToHeader(tableLayout, "Toode Nimi");
+            AddCellToHeader(tableLayout, "Kogus");
+            AddCellToHeader(tableLayout, "Hind");
+            AddCellToHeader(tableLayout, "Kategooria");
+           
+            foreach(Toode toode in SaaTooded())
+            {
+                AddCellToBody(tableLayout, toode.Nimi);
+                AddCellToBody(tableLayout, toode.Kogus);
+                AddCellToBody(tableLayout, toode.Hind);
+                AddCellToBody(tableLayout, toode.Kategooria);
             }
+            
+            return tableLayout;
+        }
+
+        private static void AddCellToHeader(PdfPTable tableLayout, string cellText)
+        {
+            tableLayout.AddCell(new PdfPCell(new Phrase(cellText))
+            {
+                HorizontalAlignment = Element.ALIGN_CENTER,
+                Padding = 5
+              
+            });
+        }
+        private static void AddCellToBody(PdfPTable tableLayout, string cellText)
+        {
+            tableLayout.AddCell(new PdfPCell(new Phrase(cellText))
+            {
+                HorizontalAlignment = Element.ALIGN_CENTER,
+                Padding = 5           
+            });
+        }
+
+        private List<Toode> SaaTooded()
+        {
+            List<Toode> tooded = new List<Toode>();
+
+            connect.Open();
+            DataTable dt = new DataTable();
+            adapter_toode = new SqlDataAdapter("SELECT * FROM Toodedtable", connect);
+            adapter_toode.Fill(dt);
+
+            if (dt != null && dt.Rows.Count > 0)
+            {
+               
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    Toode toode = new Toode();
+                    toode.Nimi = dt.Rows[i]["Toodenimetus"].ToString();
+                    toode.Hind = dt.Rows[i]["Hind"].ToString();
+                    toode.Kogus = dt.Rows[i]["Kogus"].ToString();
+                    toode.Kategooria = dt.Rows[i]["Kategooria_id"].ToString();
+
+                    tooded.Add(toode);
+                }
+            }
+
+            return tooded;
         }
         private void dataGridView1_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
@@ -224,7 +306,7 @@ namespace DB_valkrusman
                 kogus_txt1.Text = dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString();
                 hind_txt1.Text = dataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString();
 
-                Toode_gb.Image = Image.FromFile(@"..\..\Images\" + dataGridView1.Rows[e.RowIndex].Cells[4].Value.ToString());
+                Toode_gb.Image = System.Drawing.Image.FromFile(@"..\..\Images\" + dataGridView1.Rows[e.RowIndex].Cells[4].Value.ToString());
                 string v = dataGridView1.Rows[e.RowIndex].Cells[5].Value.ToString();
                 Kat_cbox.SelectedIndex = Int32.Parse(v) - 1;
 
@@ -241,5 +323,15 @@ namespace DB_valkrusman
         }
 
 
+    }
+
+    public class Toode
+    {
+        public string Nimi { get; set; }
+        public string Kogus { get; set; }
+
+        public string Hind { get; set; }
+
+        public string Kategooria { get; set; }
     }
 }
