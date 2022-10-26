@@ -6,32 +6,32 @@ using System.Data.SqlClient;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Xml.Linq;
 
 namespace DB_valkrusman
 {
-    public partial class Form1 : Form
+    public partial class kassa1 : Form
     {
+        //static string QueryString = @"C:\Users\opilane\source\repos\DB_valkrusman\Arved;Initial Catalog=TestDataBase;Integrated Security=True";
+        //SqlConnection con = new SqlConnection(QueryString);
+        SqlCommand cmd = new SqlCommand();
+        SaveFileDialog sfd = new SaveFileDialog();
+        RichTextBox rtb = new RichTextBox();
+
         OpenFileDialog openFileDialog;
         //SqlConnection connect = new SqlConnection(@"Data Source = (LocalDB)\MSSQLLocalDB; AttachDbFilename=|DataDirectory|\AppData\Tooded_DB.mdf;Integrated Security = True");
         SqlConnection connect = new SqlConnection(@"Data Source = (LocalDB)\MSSQLLocalDB; AttachDbFilename=C:\Users\opilane\source\repos\DB_valkrusman\AppData\Tooded_DB.mdf;Integrated Security = True");
-        SqlCommand cmd;
         SqlDataAdapter adapter_toode, adapter_kat;
-        
 
-        // C:\Users\opilane\source\repos\DB_valkrusman\AppData\Tooded_DB.mdf
-
-        public Form1()
+        public kassa1()
         {
             InitializeComponent();
             Naita_Andmed();
+            InitializeComponent();
         }
 
-       
 
 
         private void Lisa_btn_Click(object sender, EventArgs e)
@@ -70,11 +70,11 @@ namespace DB_valkrusman
         public void Naita_Andmed()
         {
             connect.Open();
-            DataTable dt_toode=new DataTable();
-            adapter_toode = new SqlDataAdapter("SELECT * FROM Toodedtable",connect);
+            DataTable dt_toode = new DataTable();
+            adapter_toode = new SqlDataAdapter("SELECT * FROM Toodedtable", connect);
             adapter_toode.Fill(dt_toode);
             dataGridView1.DataSource = dt_toode;
-            
+
             Toode_gb.Image = Image.FromFile("../../Images/info.jpg");
 
             connect.Close();
@@ -141,8 +141,8 @@ namespace DB_valkrusman
             connect.Close();
         }
 
-       
-       Random rand=new Random();
+
+        Random rand = new Random();
         SaveFileDialog save;
         OpenFileDialog open;
 
@@ -196,25 +196,25 @@ namespace DB_valkrusman
                 MessageBox.Show("Viga");
             }
 
-           
+
         }
 
-        //Document document = new Document();
-        private void kassa_btn_Click(object sender, EventArgs e)
+        //Document document=new Document();
+
+        private void button1_Click(object sender, EventArgs e)
         {
-        //    using (var stream = new FileStream("test.pdf", FileMode.Create, FileAccess.Write, FileShare.None))
-        //    {
-        //        PdfWriter.GetInstance(document, stream);
-        //        document.Open();
-        //        using (var imageStream = new FileStream("test.jpg", FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
-        //        {
-        //            var image = Image.GetInstance(imageStream);
-        //            document.Add(image);
-        //        }
-        //        document.Close();
-        //    }
+            sfd.Title = "Save As PDF";
+            sfd.Filter = "(*.pdf)|*.pdf";
+            sfd.InitialDirectory = @"C:\";
+            if (sfd.ShowDialog() == DialogResult.OK)
+            {
+                iTextSharp.text.Document doc = new iTextSharp.text.Document();
+                // PdfWriter.GetInstance(doc, new FileStream(sfd.FileName, FileMode.Create));
+                doc.Open();
+                doc.Add(new iTextSharp.text.Paragraph(rtb.Text));
+                doc.Close();
+            }
         }
-
         private void dataGridView1_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             try
@@ -235,11 +235,10 @@ namespace DB_valkrusman
             }
 
 
-          
+
 
 
         }
-        
 
 
     }
