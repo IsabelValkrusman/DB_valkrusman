@@ -32,7 +32,6 @@ namespace DB_valkrusman
         {
             InitializeComponent();
             Naita_Andmed();
-            InitializeComponent();
         }
 
 
@@ -82,6 +81,20 @@ namespace DB_valkrusman
 
             connect.Close();
             Naita_Kat();
+
+            //DataTable table = new DataTable();
+            //table.Columns.Add("ID", typeof(int));
+            //table.Columns.Add("Toode", typeof(string));
+            //table.Columns.Add("Kogus", typeof(int));
+            //table.Columns.Add("Hind", typeof(int));
+            //table.Columns.Add("kategooria_id", typeof(int));
+
+            //table.Rows.Add(1, "Sai", 3, 5, 1);
+            //table.Rows.Add(2, "Pitsa", 10, 2, 1);
+            //table.Rows.Add(3, "Piim", 123, 123, 1);
+            //table.Rows.Add(4, "Viinamari", 7, 2, 1);
+
+            //dataGridView1.DataSource = table;
         }
 
         public void Kustuta_andmed()
@@ -206,7 +219,6 @@ namespace DB_valkrusman
       
         private void button1_Click(object sender, EventArgs e)
         {
-           
             Document doc = new Document();
             PdfPTable tableLayout = new PdfPTable(4);
             iTextSharp.text.pdf.PdfWriter.GetInstance(doc, new FileStream(@"SVOI PUT", FileMode.Create));
@@ -215,7 +227,7 @@ namespace DB_valkrusman
             doc.Close();
 
             Process.Start(@"SVOI PUT");
-           
+
         }
 
 
@@ -226,9 +238,9 @@ namespace DB_valkrusman
                     20,
                     30,
                     30
-            }; 
-            tableLayout.SetWidths(headers);  
-            tableLayout.WidthPercentage = 80;  
+            };
+            tableLayout.SetWidths(headers);
+            tableLayout.WidthPercentage = 80;
             tableLayout.AddCell(new PdfPCell(new Phrase("Kviitung"))
             {
                 Colspan = 4,
@@ -236,20 +248,20 @@ namespace DB_valkrusman
                 PaddingBottom = 20,
                 HorizontalAlignment = Element.ALIGN_CENTER
             });
-          
+
             AddCellToHeader(tableLayout, "Toode Nimi");
             AddCellToHeader(tableLayout, "Kogus");
             AddCellToHeader(tableLayout, "Hind");
-            AddCellToHeader(tableLayout, "Kategooria");
-           
-            foreach(Toode toode in SaaTooded())
+            AddCellToHeader(tableLayout, "Summa");
+
+            foreach (Toode toode in tooted)
             {
                 AddCellToBody(tableLayout, toode.Nimi);
                 AddCellToBody(tableLayout, toode.Kogus);
                 AddCellToBody(tableLayout, toode.Hind);
-                AddCellToBody(tableLayout, toode.Kategooria);
+                AddCellToBody(tableLayout, toode.Summa);
             }
-            
+
             return tableLayout;
         }
 
@@ -271,32 +283,24 @@ namespace DB_valkrusman
             });
         }
 
-        private List<Toode> SaaTooded()
+
+        HashSet<Toode> tooted = new HashSet<Toode>();
+        private void button2_Click(object sender, EventArgs e)
         {
-            List<Toode> tooded = new List<Toode>();
 
-            connect.Open();
-            DataTable dt = new DataTable();
-            adapter_toode = new SqlDataAdapter("SELECT * FROM Toodedtable", connect);
-            adapter_toode.Fill(dt);
+            
+            Toode toode = new Toode();
+            toode.Nimi = toode_txt.Text;
+            toode.Hind = hind_txt1.Text;
+            toode.Kogus= kogus_txt1.Text;
+            toode.Summa = (Convert.ToInt32(toode.Hind) * Convert.ToInt32(toode.Kogus)).ToString();
 
-            if (dt != null && dt.Rows.Count > 0)
-            {
-               
-                for (int i = 0; i < dt.Rows.Count; i++)
-                {
-                    Toode toode = new Toode();
-                    toode.Nimi = dt.Rows[i]["Toodenimetus"].ToString();
-                    toode.Hind = dt.Rows[i]["Hind"].ToString();
-                    toode.Kogus = dt.Rows[i]["Kogus"].ToString();
-                    toode.Kategooria = dt.Rows[i]["Kategooria_id"].ToString();
+            tooted.Add(toode);
 
-                    tooded.Add(toode);
-                }
-            }
-
-            return tooded;
         }
+
+      
+
         private void dataGridView1_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             try
@@ -306,9 +310,9 @@ namespace DB_valkrusman
                 kogus_txt1.Text = dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString();
                 hind_txt1.Text = dataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString();
 
-                Toode_gb.Image = System.Drawing.Image.FromFile(@"..\..\Images\" + dataGridView1.Rows[e.RowIndex].Cells[4].Value.ToString());
-                string v = dataGridView1.Rows[e.RowIndex].Cells[5].Value.ToString();
-                Kat_cbox.SelectedIndex = Int32.Parse(v) - 1;
+                //Toode_gb.Image = System.Drawing.Image.FromFile(@"..\..\Images\" + dataGridView1.Rows[e.RowIndex].Cells[4].Value.ToString());
+                //string v = dataGridView1.Rows[e.RowIndex].Cells[5].Value.ToString();
+                //Kat_cbox.SelectedIndex = Int32.Parse(v) - 1;
 
             }
             catch (Exception)
@@ -332,6 +336,6 @@ namespace DB_valkrusman
 
         public string Hind { get; set; }
 
-        public string Kategooria { get; set; }
+        public string Summa { get; set; }
     }
 }
