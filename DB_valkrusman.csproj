@@ -73,6 +73,24 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="kasutaja.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="kasutaja.Designer.cs">
+      <DependentUpon>kasutaja.cs</DependentUpon>
+    </Compile>
+    <Compile Include="omanik.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="omanik.Designer.cs">
+      <DependentUpon>omanik.cs</DependentUpon>
+    </Compile>
+    <Compile Include="pood.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="pood.Designer.cs">
+      <DependentUpon>pood.cs</DependentUpon>
+    </Compile>
     <Compile Include="HtmlTextWriter.cs" />
     <Compile Include="kassa1.cs">
       <SubType>Form</SubType>
@@ -92,6 +110,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="kassa1.resx">
       <DependentUpon>kassa1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="kasutaja.resx">
+      <DependentUpon>kasutaja.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="omanik.resx">
+      <DependentUpon>omanik.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="pood.resx">
+      <DependentUpon>pood.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -121,6 +148,7 @@
     <Content Include="AppData\Tooded_DB_log.ldf">
       <DependentUpon>Tooded_DB.mdf</DependentUpon>
     </Content>
+    <Content Include="idea.txt" />
     <Content Include="Images\info.jpg" />
     <Content Include="Images\juust.jpg" />
     <Content Include="Images\majonees.jpg" />
