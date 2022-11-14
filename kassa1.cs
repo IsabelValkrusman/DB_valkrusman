@@ -22,7 +22,7 @@ namespace DB_valkrusman
         SqlCommand cmd = new SqlCommand();
         SaveFileDialog sfd = new SaveFileDialog();
         RichTextBox rtb = new RichTextBox();
-
+        string soodustus = "0%";
         OpenFileDialog openFileDialog;
         //SqlConnection connect = new SqlConnection(@"Data Source = (LocalDB)\MSSQLLocalDB; AttachDbFilename=|DataDirectory|\AppData\Tooded_DB.mdf;Integrated Security = True");
         SqlConnection connect = new SqlConnection(@"Data Source = (LocalDB)\MSSQLLocalDB; AttachDbFilename=C:\Users\opilane\source\repos\DB_valkrusman\AppData\Tooded_DB.mdf;Integrated Security = True");
@@ -221,12 +221,12 @@ namespace DB_valkrusman
         {
             Document doc = new Document();
             PdfPTable tableLayout = new PdfPTable(4);
-            iTextSharp.text.pdf.PdfWriter.GetInstance(doc, new FileStream(@"C:\Users\opilane\source\repos\DB_valkrusman\Arved", FileMode.Create));
+            iTextSharp.text.pdf.PdfWriter.GetInstance(doc, new FileStream(@"C:\Users\opilane\source\repos\DB_valkrusman\Arved\arve.pdf", FileMode.Create));
             doc.Open();
             doc.Add(Add_Content_To_PDF(tableLayout));
             doc.Close();
 
-            Process.Start(@"C:\Users\opilane\source\repos\DB_valkrusman\Arved");
+            Process.Start(@"C:\Users\opilane\source\repos\DB_valkrusman\Arved\arve.pdf");
         }
 
 
@@ -282,15 +282,16 @@ namespace DB_valkrusman
             });
         }
 
-
+        
         HashSet<Toode> tooted = new HashSet<Toode>();
         private void button2_Click(object sender, EventArgs e)
         {
 
-            
+            string soodus = soodustus.Replace("%", "");
+            int hind = Convert.ToInt32(hind_txt1.Text) * (1 - Convert.ToInt32(soodus) / 100);
             Toode toode = new Toode();
             toode.Nimi = toode_txt.Text;
-            toode.Hind = hind_txt1.Text;
+            toode.Hind = hind.ToString();
             toode.Kogus= kogus_txt1.Text;
             toode.Summa = (Convert.ToInt32(toode.Hind) * Convert.ToInt32(toode.Kogus)).ToString();
 
@@ -298,7 +299,27 @@ namespace DB_valkrusman
 
         }
 
-      
+       
+
+        private void soodus0_CheckedChanged(object sender, EventArgs e)
+        {
+            soodustus = soodus0.Text;
+        }
+
+        private void soodus10_CheckedChanged(object sender, EventArgs e)
+        {
+            soodustus = soodus10.Text;
+        }
+
+        private void soodus20_CheckedChanged(object sender, EventArgs e)
+        {
+            soodustus = soodus20.Text;
+        }
+
+        private void soodus50_CheckedChanged(object sender, EventArgs e)
+        {
+            soodustus = soodus50.Text;
+        }
 
         private void dataGridView1_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {

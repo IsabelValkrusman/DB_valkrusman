@@ -25,7 +25,7 @@ namespace DB_valkrusman
             {
                 //SqlConnection con = new SqlConnection("Data Source=NiluNilesh;Integrated Security=True");  
                 SqlConnection con = new SqlConnection(@"Data Source = (LocalDB)\MSSQLLocalDB; AttachDbFilename=C:\Users\opilane\source\repos\DB_valkrusman\AppData\Tooded_DB.mdf;Integrated Security = True");
-                SqlCommand cmd = new SqlCommand("INSERT INTO Kasutajad (Kasutaja, Parool) VALUES(@Kasutaja, @Paroolid)", con);
+                SqlCommand cmd = new SqlCommand("INSERT INTO Kasutajad (Kasutaja, Parool) VALUES (@Kasutaja, @Paroolid)", con);
                 //SqlCommand cmd = new SqlCommand(@"sp_insert", con);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@Kasutaja", textBox1.Text);
@@ -44,5 +44,7 @@ namespace DB_valkrusman
 
           
         }
+
+     
     }
 }

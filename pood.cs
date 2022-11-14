@@ -15,11 +15,13 @@ namespace DB_valkrusman
         public pood()
         {
             InitializeComponent();
+           
+
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Form1 Parid = new Form1();
+            kategooria Parid = new kategooria();
             Parid.ShowDialog();
         
         }
@@ -34,6 +36,38 @@ namespace DB_valkrusman
         {
             omanik Parid = new omanik();
             Parid.ShowDialog();
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            soodustus Parid = new soodustus();
+            Parid.ShowDialog();
+        }
+
+        private void pood_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            
+            Bitmap pilt = new Bitmap(@"..\..\sport.jpg");
+
+            //load image in picturebox
+            //pilt.Image = bmp;
+
+            //write image
+            //bmp.Save(@"..\..\sport.jpg");
+
+            MessageBox.Show(pilt.ToString());
+
+           
         }
     }
 }

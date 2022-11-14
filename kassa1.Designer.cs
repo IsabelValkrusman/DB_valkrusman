@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             this.kogus_txt1 = new System.Windows.Forms.NumericUpDown();
             this.hind_txt1 = new System.Windows.Forms.NumericUpDown();
             this.Lisa_kat_btn = new System.Windows.Forms.Button();
@@ -39,7 +39,6 @@
             this.Uuenda_btn = new System.Windows.Forms.Button();
             this.Lisa_btn = new System.Windows.Forms.Button();
             this.Otsi_btn = new System.Windows.Forms.Button();
-            this.Toode_gb = new System.Windows.Forms.PictureBox();
             this.Kogus_lbl = new System.Windows.Forms.Label();
             this.Hind_lbl = new System.Windows.Forms.Label();
             this.Kategooria_lbl = new System.Windows.Forms.Label();
@@ -47,6 +46,12 @@
             this.toode_txt = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.soodus0 = new System.Windows.Forms.RadioButton();
+            this.Toode_gb = new System.Windows.Forms.PictureBox();
+            this.soodus10 = new System.Windows.Forms.RadioButton();
+            this.soodus20 = new System.Windows.Forms.RadioButton();
+            this.soodus50 = new System.Windows.Forms.RadioButton();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.kogus_txt1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.hind_txt1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -66,11 +71,10 @@
             this.hind_txt1.Name = "hind_txt1";
             this.hind_txt1.Size = new System.Drawing.Size(130, 20);
             this.hind_txt1.TabIndex = 32;
-          
             // 
             // Lisa_kat_btn
             // 
-            this.Lisa_kat_btn.Location = new System.Drawing.Point(311, 199);
+            this.Lisa_kat_btn.Location = new System.Drawing.Point(290, 199);
             this.Lisa_kat_btn.Name = "Lisa_kat_btn";
             this.Lisa_kat_btn.Size = new System.Drawing.Size(92, 30);
             this.Lisa_kat_btn.TabIndex = 31;
@@ -87,33 +91,32 @@
             // 
             // dataGridView1
             // 
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle8;
             this.dataGridView1.Location = new System.Drawing.Point(60, 235);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(675, 179);
             this.dataGridView1.TabIndex = 29;
             this.dataGridView1.RowHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView1_RowHeaderMouseClick);
-
             // 
             // Kustuta_btn
             // 
-            this.Kustuta_btn.Location = new System.Drawing.Point(606, 199);
+            this.Kustuta_btn.Location = new System.Drawing.Point(584, 199);
             this.Kustuta_btn.Name = "Kustuta_btn";
             this.Kustuta_btn.Size = new System.Drawing.Size(92, 30);
             this.Kustuta_btn.TabIndex = 28;
@@ -122,7 +125,7 @@
             // 
             // Uuenda_btn
             // 
-            this.Uuenda_btn.Location = new System.Drawing.Point(507, 199);
+            this.Uuenda_btn.Location = new System.Drawing.Point(486, 199);
             this.Uuenda_btn.Name = "Uuenda_btn";
             this.Uuenda_btn.Size = new System.Drawing.Size(92, 30);
             this.Uuenda_btn.TabIndex = 27;
@@ -131,7 +134,7 @@
             // 
             // Lisa_btn
             // 
-            this.Lisa_btn.Location = new System.Drawing.Point(409, 199);
+            this.Lisa_btn.Location = new System.Drawing.Point(388, 199);
             this.Lisa_btn.Name = "Lisa_btn";
             this.Lisa_btn.Size = new System.Drawing.Size(92, 30);
             this.Lisa_btn.TabIndex = 26;
@@ -141,21 +144,12 @@
             // 
             // Otsi_btn
             // 
-            this.Otsi_btn.Location = new System.Drawing.Point(648, 146);
+            this.Otsi_btn.Location = new System.Drawing.Point(696, 199);
             this.Otsi_btn.Name = "Otsi_btn";
             this.Otsi_btn.Size = new System.Drawing.Size(92, 30);
             this.Otsi_btn.TabIndex = 25;
             this.Otsi_btn.Text = "Otsi fail";
             this.Otsi_btn.UseVisualStyleBackColor = true;
-            // 
-            // Toode_gb
-            // 
-            this.Toode_gb.Location = new System.Drawing.Point(418, 41);
-            this.Toode_gb.Name = "Toode_gb";
-            this.Toode_gb.Size = new System.Drawing.Size(224, 152);
-            this.Toode_gb.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.Toode_gb.TabIndex = 24;
-            this.Toode_gb.TabStop = false;
             // 
             // Kogus_lbl
             // 
@@ -220,11 +214,82 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
+            // soodus0
+            // 
+            this.soodus0.AutoSize = true;
+            this.soodus0.Location = new System.Drawing.Point(655, 64);
+            this.soodus0.Name = "soodus0";
+            this.soodus0.Size = new System.Drawing.Size(39, 17);
+            this.soodus0.TabIndex = 37;
+            this.soodus0.TabStop = true;
+            this.soodus0.Text = "0%";
+            this.soodus0.UseVisualStyleBackColor = true;
+            this.soodus0.CheckedChanged += new System.EventHandler(this.soodus0_CheckedChanged);
+            // 
+            // Toode_gb
+            // 
+            this.Toode_gb.Location = new System.Drawing.Point(375, 36);
+            this.Toode_gb.Name = "Toode_gb";
+            this.Toode_gb.Size = new System.Drawing.Size(224, 152);
+            this.Toode_gb.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.Toode_gb.TabIndex = 24;
+            this.Toode_gb.TabStop = false;
+            // 
+            // soodus10
+            // 
+            this.soodus10.AutoSize = true;
+            this.soodus10.Location = new System.Drawing.Point(655, 87);
+            this.soodus10.Name = "soodus10";
+            this.soodus10.Size = new System.Drawing.Size(45, 17);
+            this.soodus10.TabIndex = 38;
+            this.soodus10.TabStop = true;
+            this.soodus10.Text = "10%";
+            this.soodus10.UseVisualStyleBackColor = true;
+            this.soodus10.CheckedChanged += new System.EventHandler(this.soodus10_CheckedChanged);
+            // 
+            // soodus20
+            // 
+            this.soodus20.AutoSize = true;
+            this.soodus20.Location = new System.Drawing.Point(655, 110);
+            this.soodus20.Name = "soodus20";
+            this.soodus20.Size = new System.Drawing.Size(45, 17);
+            this.soodus20.TabIndex = 39;
+            this.soodus20.TabStop = true;
+            this.soodus20.Text = "20%";
+            this.soodus20.UseVisualStyleBackColor = true;
+            this.soodus20.CheckedChanged += new System.EventHandler(this.soodus20_CheckedChanged);
+            // 
+            // soodus50
+            // 
+            this.soodus50.AutoSize = true;
+            this.soodus50.Location = new System.Drawing.Point(655, 133);
+            this.soodus50.Name = "soodus50";
+            this.soodus50.Size = new System.Drawing.Size(45, 17);
+            this.soodus50.TabIndex = 40;
+            this.soodus50.TabStop = true;
+            this.soodus50.Text = "50%";
+            this.soodus50.UseVisualStyleBackColor = true;
+            this.soodus50.CheckedChanged += new System.EventHandler(this.soodus50_CheckedChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(640, 36);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(67, 13);
+            this.label1.TabIndex = 41;
+            this.label1.Text = "Sooduskaart";
+            // 
             // kassa1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.soodus50);
+            this.Controls.Add(this.soodus20);
+            this.Controls.Add(this.soodus10);
+            this.Controls.Add(this.soodus0);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.kogus_txt1);
@@ -273,5 +338,10 @@
         private System.Windows.Forms.TextBox toode_txt;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.RadioButton soodus0;
+        private System.Windows.Forms.RadioButton soodus10;
+        private System.Windows.Forms.RadioButton soodus20;
+        private System.Windows.Forms.RadioButton soodus50;
+        private System.Windows.Forms.Label label1;
     }
 }
