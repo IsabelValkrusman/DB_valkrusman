@@ -23,6 +23,7 @@ namespace DB_valkrusman
         SaveFileDialog sfd = new SaveFileDialog();
         RichTextBox rtb = new RichTextBox();
         string soodustus = "0%";
+        string maksimumKogus = "1";
         OpenFileDialog openFileDialog;
         //SqlConnection connect = new SqlConnection(@"Data Source = (LocalDB)\MSSQLLocalDB; AttachDbFilename=|DataDirectory|\AppData\Tooded_DB.mdf;Integrated Security = True");
         SqlConnection connect = new SqlConnection(@"Data Source = (LocalDB)\MSSQLLocalDB; AttachDbFilename=C:\Users\opilane\source\repos\DB_valkrusman\AppData\Tooded_DB.mdf;Integrated Security = True");
@@ -108,53 +109,53 @@ namespace DB_valkrusman
 
         private void Lisa_kat_btn_Click(object sender, EventArgs e)
         {
-            cmd = new SqlCommand("INSERT INTO Kategooria (Kategooria_nimetus) VALUES (@kat)", connect);
-            connect.Open();
-            cmd.Parameters.AddWithValue("@kat", Kat_cbox.Text);
-            cmd.ExecuteNonQuery();
-            connect.Close();
-            Kustuta_andmed();
-            Naita_Kat();
+            //cmd = new SqlCommand("INSERT INTO Kategooria (Kategooria_nimetus) VALUES (@kat)", connect);
+            //connect.Open();
+            //cmd.Parameters.AddWithValue("@kat", Kat_cbox.Text);
+            //cmd.ExecuteNonQuery();
+            //connect.Close();
+            //Kustuta_andmed();
+            //Naita_Kat();
 
         }
 
 
         public void Naita_Kat()
         {
-            connect.Open();
-            adapter_kat = new SqlDataAdapter("SELECT Kategooria_nimetus FROM Kategooria", connect);
-            DataTable dt_kat = new DataTable();
-            adapter_kat.Fill(dt_kat);
-            foreach (DataRow nimetus in dt_kat.Rows)
-            {
-                Kat_cbox.Items.Add(nimetus["Kategooria_nimetus"]);
-            }
-            connect.Close();
+            //connect.Open();
+            //adapter_kat = new SqlDataAdapter("SELECT Kategooria_nimetus FROM Kategooria", connect);
+            //DataTable dt_kat = new DataTable();
+            //adapter_kat.Fill(dt_kat);
+            //foreach (DataRow nimetus in dt_kat.Rows)
+            //{
+            //    Kat_cbox.Items.Add(nimetus["Kategooria_nimetus"]);
+            //}
+            //connect.Close();
         }
 
         private void Kustuta_btn_Click(object sender, EventArgs e)
         {
-            //if(MessageBox.Show("Toode-Jah/Kategooria-Ei","Mida soovite kustutada?",MessageBoxButtons.YesNo)==0)
-            {
+            ////if(MessageBox.Show("Toode-Jah/Kategooria-Ei","Mida soovite kustutada?",MessageBoxButtons.YesNo)==0)
+            //{
 
-                if (dataGridView1.SelectedRows.Count == 0)
-                    return;
+            //    if (dataGridView1.SelectedRows.Count == 0)
+            //        return;
 
-                string sql = "DELETE FROM Toodedtable WHERE id=@rowID";
+            //    string sql = "DELETE FROM Toodedtable WHERE id=@rowID";
 
-                using (SqlCommand deleteRecord = new SqlCommand(sql, connect))
-                {
-                    connect.Open();
-                    int selectedIndex = dataGridView1.SelectedRows[0].Index;
-                    int rowID = Convert.ToInt32(dataGridView1[0, selectedIndex].Value);
+            //    using (SqlCommand deleteRecord = new SqlCommand(sql, connect))
+            //    {
+            //        connect.Open();
+            //        int selectedIndex = dataGridView1.SelectedRows[0].Index;
+            //        int rowID = Convert.ToInt32(dataGridView1[0, selectedIndex].Value);
 
-                    deleteRecord.Parameters.Add("@rowID", SqlDbType.Int).Value = rowID;
-                    deleteRecord.ExecuteNonQuery();
+            //        deleteRecord.Parameters.Add("@rowID", SqlDbType.Int).Value = rowID;
+            //        deleteRecord.ExecuteNonQuery();
 
-                    dataGridView1.Rows.RemoveAt(selectedIndex);
-                }
-            }
-            connect.Close();
+            //        dataGridView1.Rows.RemoveAt(selectedIndex);
+            //    }
+            //}
+            //connect.Close();
         }
 
 
@@ -191,26 +192,26 @@ namespace DB_valkrusman
 
         private void Uuenda_btn_Click(object sender, EventArgs e)
         {
-            if (toode_txt.Text != "" && kogus_txt1.Text != "" && hind_txt1.Text != "" && Toode_gb.Image != null)
-            {
-                cmd = new SqlCommand("UPDATE Toodetable  SET Toodenimetus=@toode,Kogus=@kogus,Hind=@hind, Pilt=@pilt WHERE Id=@id", connect);
-                connect.Open();
-                cmd.Parameters.AddWithValue("@id", Id);
-                cmd.Parameters.AddWithValue("@toode", toode_txt.Text);
-                cmd.Parameters.AddWithValue("@kogus", kogus_txt1.Text);
-                cmd.Parameters.AddWithValue("@hind", hind_txt1.Text.Replace(",", "."));
-                string file_pilt = toode_txt.Text + ".jpg";//kontroll
-                cmd.Parameters.AddWithValue("@pilt", file_pilt);
-                cmd.ExecuteNonQuery();
-                connect.Close();
-                Naita_Andmed();
-                Kustuta_andmed();
-                MessageBox.Show("Andmed uuendatud");
-            }
-            else
-            {
-                MessageBox.Show("Viga");
-            }
+            //if (toode_txt.Text != "" && kogus_txt1.Text != "" && hind_txt1.Text != "" && Toode_gb.Image != null)
+            //{
+            //    cmd = new SqlCommand("UPDATE Toodetable  SET Toodenimetus=@toode,Kogus=@kogus,Hind=@hind, Pilt=@pilt WHERE Id=@id", connect);
+            //    connect.Open();
+            //    cmd.Parameters.AddWithValue("@id", Id);
+            //    cmd.Parameters.AddWithValue("@toode", toode_txt.Text);
+            //    cmd.Parameters.AddWithValue("@kogus", kogus_txt1.Text);
+            //    cmd.Parameters.AddWithValue("@hind", hind_txt1.Text.Replace(",", "."));
+            //    string file_pilt = toode_txt.Text + ".jpg";//kontroll
+            //    cmd.Parameters.AddWithValue("@pilt", file_pilt);
+            //    cmd.ExecuteNonQuery();
+            //    connect.Close();
+            //    Naita_Andmed();
+            //    Kustuta_andmed();
+            //    MessageBox.Show("Andmed uuendatud");
+            //}
+            //else
+            //{
+            //    MessageBox.Show("Viga");
+            //}
 
 
         }
@@ -288,18 +289,31 @@ namespace DB_valkrusman
         {
 
             string soodus = soodustus.Replace("%", "");
-            int hind = Convert.ToInt32(hind_txt1.Text) * (1 - Convert.ToInt32(soodus) / 100);
-            Toode toode = new Toode();
-            toode.Nimi = toode_txt.Text;
-            toode.Hind = hind.ToString();
-            toode.Kogus= kogus_txt1.Text;
-            toode.Summa = (Convert.ToInt32(toode.Hind) * Convert.ToInt32(toode.Kogus)).ToString();
+            double hind = Convert.ToDouble(hind_txt1.Text) * (1 - Convert.ToDouble(soodus) / 100);
+            Toode toode = new Toode
+            {
+                Nimi = toode_txt.Text,
+                Hind = hind.ToString(),
+                Kogus = kogus_txt1.Text
+            };
+            toode.Summa = (Convert.ToDouble(toode.Hind) * Convert.ToDouble(toode.Kogus)).ToString();
 
             tooted.Add(toode);
 
         }
 
-       
+        private void EemaldaToode(int kogus)
+        {
+            cmd = new SqlCommand("UPDATE Toodedtable SET Kogus = @kogus WHERE ID = @id", connect);
+            connect.Open();
+            cmd.Parameters.AddWithValue("@kogus", kogus);
+            cmd.Parameters.AddWithValue("@id", Id);
+            cmd.ExecuteNonQuery();
+            connect.Close();
+            Naita_Andmed();
+        }
+
+
 
         private void soodus0_CheckedChanged(object sender, EventArgs e)
         {
@@ -321,14 +335,29 @@ namespace DB_valkrusman
             soodustus = soodus50.Text;
         }
 
+        private void kogus_txt1_ValueChanged(object sender, EventArgs e)
+        {
+            int reaalneKogus = Convert.ToInt32(kogus_txt1.Value);
+            int maxKogus = Convert.ToInt32(maksimumKogus);
+            if (reaalneKogus >= maxKogus)
+            {
+                kogus_txt1.Text = maksimumKogus;
+                kogus_txt1.Value = maxKogus;
+            } 
+        }
+
         private void dataGridView1_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             try
             {
+                string soodus = soodustus.Replace("%", "");
+                double hind = Convert.ToDouble(dataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString()) * (1 - Convert.ToDouble(soodus) / 100);
                 Id = (int)dataGridView1.Rows[e.RowIndex].Cells[0].Value;//kui andmed puuduvad reas
                 toode_txt.Text = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
-                kogus_txt1.Text = dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString();
-                hind_txt1.Text = dataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString();
+                maksimumKogus = dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString();
+                kogus_txt1.Text = "1";
+                hind_txt1.Text = hind.ToString();
+
 
                 //Toode_gb.Image = System.Drawing.Image.FromFile(@"..\..\Images\" + dataGridView1.Rows[e.RowIndex].Cells[4].Value.ToString());
                 //string v = dataGridView1.Rows[e.RowIndex].Cells[5].Value.ToString();
