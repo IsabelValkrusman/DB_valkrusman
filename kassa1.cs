@@ -299,7 +299,7 @@ namespace DB_valkrusman
             toode.Summa = (Convert.ToDouble(toode.Hind) * Convert.ToDouble(toode.Kogus)).ToString();
 
             tooted.Add(toode);
-
+            EemaldaToode(Convert.ToInt32(toode.Kogus));
         }
 
         private void EemaldaToode(int kogus)
