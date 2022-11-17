@@ -16,7 +16,7 @@ namespace DB_valkrusman
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new kassa1());
+            Application.Run(new pood());
         }
     }
 }

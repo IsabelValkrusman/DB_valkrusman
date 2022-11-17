@@ -32,13 +32,8 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.kogus_txt1 = new System.Windows.Forms.NumericUpDown();
             this.hind_txt1 = new System.Windows.Forms.NumericUpDown();
-            this.Lisa_kat_btn = new System.Windows.Forms.Button();
             this.Kat_cbox = new System.Windows.Forms.ComboBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.Kustuta_btn = new System.Windows.Forms.Button();
-            this.Uuenda_btn = new System.Windows.Forms.Button();
-            this.Lisa_btn = new System.Windows.Forms.Button();
-            this.Otsi_btn = new System.Windows.Forms.Button();
             this.Kogus_lbl = new System.Windows.Forms.Label();
             this.Hind_lbl = new System.Windows.Forms.Label();
             this.Kategooria_lbl = new System.Windows.Forms.Label();
@@ -73,15 +68,6 @@
             this.hind_txt1.Size = new System.Drawing.Size(130, 20);
             this.hind_txt1.TabIndex = 32;
             // 
-            // Lisa_kat_btn
-            // 
-            this.Lisa_kat_btn.Location = new System.Drawing.Point(290, 199);
-            this.Lisa_kat_btn.Name = "Lisa_kat_btn";
-            this.Lisa_kat_btn.Size = new System.Drawing.Size(92, 30);
-            this.Lisa_kat_btn.TabIndex = 31;
-            this.Lisa_kat_btn.Text = "Lisa kategooria";
-            this.Lisa_kat_btn.UseVisualStyleBackColor = true;
-            // 
             // Kat_cbox
             // 
             this.Kat_cbox.FormattingEnabled = true;
@@ -114,43 +100,6 @@
             this.dataGridView1.Size = new System.Drawing.Size(675, 179);
             this.dataGridView1.TabIndex = 29;
             this.dataGridView1.RowHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView1_RowHeaderMouseClick);
-            // 
-            // Kustuta_btn
-            // 
-            this.Kustuta_btn.Location = new System.Drawing.Point(584, 199);
-            this.Kustuta_btn.Name = "Kustuta_btn";
-            this.Kustuta_btn.Size = new System.Drawing.Size(92, 30);
-            this.Kustuta_btn.TabIndex = 28;
-            this.Kustuta_btn.Text = "Kustuta";
-            this.Kustuta_btn.UseVisualStyleBackColor = true;
-            // 
-            // Uuenda_btn
-            // 
-            this.Uuenda_btn.Location = new System.Drawing.Point(486, 199);
-            this.Uuenda_btn.Name = "Uuenda_btn";
-            this.Uuenda_btn.Size = new System.Drawing.Size(92, 30);
-            this.Uuenda_btn.TabIndex = 27;
-            this.Uuenda_btn.Text = "Uuenda";
-            this.Uuenda_btn.UseVisualStyleBackColor = true;
-            // 
-            // Lisa_btn
-            // 
-            this.Lisa_btn.Location = new System.Drawing.Point(388, 199);
-            this.Lisa_btn.Name = "Lisa_btn";
-            this.Lisa_btn.Size = new System.Drawing.Size(92, 30);
-            this.Lisa_btn.TabIndex = 26;
-            this.Lisa_btn.Text = "Lisa";
-            this.Lisa_btn.UseVisualStyleBackColor = true;
-            this.Lisa_btn.Click += new System.EventHandler(this.Lisa_btn_Click);
-            // 
-            // Otsi_btn
-            // 
-            this.Otsi_btn.Location = new System.Drawing.Point(696, 199);
-            this.Otsi_btn.Name = "Otsi_btn";
-            this.Otsi_btn.Size = new System.Drawing.Size(92, 30);
-            this.Otsi_btn.TabIndex = 25;
-            this.Otsi_btn.Text = "Otsi fail";
-            this.Otsi_btn.UseVisualStyleBackColor = true;
             // 
             // Kogus_lbl
             // 
@@ -295,13 +244,8 @@
             this.Controls.Add(this.button1);
             this.Controls.Add(this.kogus_txt1);
             this.Controls.Add(this.hind_txt1);
-            this.Controls.Add(this.Lisa_kat_btn);
             this.Controls.Add(this.Kat_cbox);
             this.Controls.Add(this.dataGridView1);
-            this.Controls.Add(this.Kustuta_btn);
-            this.Controls.Add(this.Uuenda_btn);
-            this.Controls.Add(this.Lisa_btn);
-            this.Controls.Add(this.Otsi_btn);
             this.Controls.Add(this.Toode_gb);
             this.Controls.Add(this.Kogus_lbl);
             this.Controls.Add(this.Hind_lbl);
@@ -324,13 +268,8 @@
       
         private System.Windows.Forms.NumericUpDown kogus_txt1;
         private System.Windows.Forms.NumericUpDown hind_txt1;
-        private System.Windows.Forms.Button Lisa_kat_btn;
         private System.Windows.Forms.ComboBox Kat_cbox;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.Button Kustuta_btn;
-        private System.Windows.Forms.Button Uuenda_btn;
-        private System.Windows.Forms.Button Lisa_btn;
-        private System.Windows.Forms.Button Otsi_btn;
         private System.Windows.Forms.PictureBox Toode_gb;
         private System.Windows.Forms.Label Kogus_lbl;
         private System.Windows.Forms.Label Hind_lbl;

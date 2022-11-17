@@ -222,12 +222,12 @@ namespace DB_valkrusman
         {
             Document doc = new Document();
             PdfPTable tableLayout = new PdfPTable(4);
-            iTextSharp.text.pdf.PdfWriter.GetInstance(doc, new FileStream(@"C:\Users\opilane\source\repos\DB_valkrusman\Arved\arve.pdf", FileMode.Create));
+            iTextSharp.text.pdf.PdfWriter.GetInstance(doc, new FileStream(@"C:\Users\opilane\source\repos\DB_valkrusman\Arved\arvee.pdf", FileMode.Create));
             doc.Open();
             doc.Add(Add_Content_To_PDF(tableLayout));
             doc.Close();
 
-            Process.Start(@"C:\Users\opilane\source\repos\DB_valkrusman\Arved\arve.pdf");
+            Process.Start(@"C:\Users\opilane\source\repos\DB_valkrusman\Arved\arvee.pdf");
         }
 
 
